@@ -30,10 +30,32 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
   const goalPercentage = (readingGoal.current / readingGoal.target) * 100
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0]">
-      {/* Subtle Pattern Overlay */}
-      <div className="fixed inset-0 opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Particle Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-pink-600/10 animate-pulse" />
+        <div className="particles-container absolute inset-0">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white/20 rounded-full animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`
+              }}
+            />
+          ))}
+        </div>
+      </div>
+      
+      {/* Grid Pattern Overlay */}
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none">
+        <div className="absolute inset-0" style={{ 
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-10 relative z-10">
@@ -44,26 +66,36 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
           <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-pulse" />
           <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-pulse delay-1000" />
           
-          <div className="relative space-y-4">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200/50 shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          <div className="relative space-y-6">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-400 shadow-lg"></span>
               </span>
-              <span className="text-xs font-semibold text-gray-700 uppercase tracking-wide">Reading Streak • 3 days</span>
+              <span className="text-sm font-bold text-white uppercase tracking-wider">Reading Streak 7 days</span>
+              <span className="text-2xl animate-bounce"></span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span className="text-gray-900">Welcome back,</span>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight">
+              <span className="text-white/90 drop-shadow-2xl">Welcome back,</span>
               <br />
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
-                Fellow Reader
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient drop-shadow-2xl">
+                Book Master
               </span>
             </h1>
             
-            <p className="text-lg text-gray-600 max-w-2xl leading-relaxed">
-              Your literary sanctuary awaits. Track your journey, discover worlds between pages, and celebrate every chapter completed.
+            <p className="text-xl text-white/70 max-w-3xl leading-relaxed font-light">
+              Your literary sanctuary awaits. Track your journey through countless worlds, celebrate every chapter completed, and become the reader you were meant to be.
             </p>
+            
+            <div className="flex gap-4">
+              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-2xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 hover:scale-105">
+                Continue Reading
+              </button>
+              <button className="px-8 py-4 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                Browse Books
+              </button>
+            </div>
           </div>
         </div>
 
@@ -77,33 +109,51 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
           ].map((stat, idx) => (
             <div 
               key={idx}
-              className="group relative bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden cursor-pointer"
-              style={{ animationDelay: `${idx * 100}ms`, animation: 'slideUp 0.5s ease-out forwards', opacity: 0 }}
+              className="group relative bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-3 overflow-hidden cursor-pointer"
+              style={{ animationDelay: `${idx * 100}ms`, animation: 'slideUp 0.6s ease-out forwards', opacity: 0 }}
             >
               {/* Animated Gradient Border */}
-              <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${stat.color.split(' ')[1]}, transparent)` }} />
+              <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-30 transition-opacity duration-700" style={{ background: `linear-gradient(90deg, transparent, ${stat.color.split(' ')[1]}, transparent)` }} />
+              
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-xl" style={{ background: stat.color }} />
               
               <div className="relative p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="space-y-1">
-                    <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">{stat.label}</p>
-                    <p className="text-4xl font-bold text-gray-900 tracking-tight">{stat.value}</p>
+                  <div className="space-y-2">
+                    <p className="text-sm font-bold text-white/70 uppercase tracking-wider">{stat.label}</p>
+                    <p className="text-5xl font-black text-white tracking-tight">{stat.value}</p>
                   </div>
-                  <div className={`text-3xl p-3 rounded-2xl bg-gradient-to-br ${stat.color} shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                    <span className="drop-shadow-md">{stat.icon}</span>
+                  <div className={`text-4xl p-4 rounded-3xl bg-gradient-to-br ${stat.color} shadow-2xl group-hover:scale-125 group-hover:rotate-12 transition-all duration-500`}>
+                    <span className="drop-shadow-lg">{stat.icon}</span>
                   </div>
                 </div>
-                <div className="mt-4 pt-3 border-t border-gray-100">
-                  <div className="flex items-center gap-1">
-                    <span className="text-xs font-medium text-emerald-600">↗︎</span>
-                    <span className="text-xs text-gray-500">{stat.trend}</span>
+                <div className="mt-4 pt-3 border-t border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold text-emerald-400 animate-pulse">?</span>
+                    <span className="text-sm text-white/60">{stat.trend}</span>
                   </div>
                 </div>
               </div>
               
               {/* Shine Effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
+              </div>
+              
+              {/* Particle Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                {[...Array(5)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/60 rounded-full animate-float"
+                    style={{
+                      left: `${20 + i * 15}%`,
+                      top: `${30 + i * 10}%`,
+                      animationDelay: `${i * 0.1}s`
+                    }}
+                  />
+                ))}
               </div>
             </div>
           ))}
@@ -115,38 +165,40 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
           {/* Left Column - 2/3 width */}
           <div className="lg:col-span-2 space-y-8">
             {/* Quick Actions with Hover Effects */}
-            <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-md hover:shadow-lg transition-all duration-300">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
-                <h2 className="text-xl font-bold text-gray-800">Quick Actions</h2>
+            <div className="bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl hover:shadow-3xl transition-all duration-500">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-2 h-10 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full shadow-lg shadow-cyan-400/50" />
+                <h2 className="text-2xl font-black text-white">Quick Actions</h2>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <button
                   onClick={() => setCurrentPage('browse')}
-                  className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105"
                 >
-                  <div className="relative flex items-center justify-between w-full px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">🔍</span>
-                      <span className="font-semibold text-white">Browse New Books</span>
+                  <div className="relative flex items-center justify-between w-full px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl animate-pulse">?</span>
+                      <span className="font-black text-white text-lg">Browse New Books</span>
                     </div>
-                    <span className="text-white/70 group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300">→</span>
+                    <span className="text-white/80 group-hover:translate-x-2 group-hover:scale-125 transition-all duration-300 text-2xl">?</span>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </button>
                 
                 <button
                   onClick={() => setCurrentPage('vault')}
-                  className="group relative overflow-hidden rounded-xl bg-gray-50 border-2 border-gray-100 hover:border-gray-200 shadow-md hover:shadow-lg transition-all duration-300"
+                  className="group relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-xl border-2 border-white/20 hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 hover:scale-105"
                 >
-                  <div className="relative flex items-center justify-between w-full px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">📦</span>
-                      <span className="font-semibold text-gray-700">Manage Your Vault</span>
+                  <div className="relative flex items-center justify-between w-full px-8 py-6">
+                    <div className="flex items-center gap-4">
+                      <span className="text-3xl animate-bounce">?</span>
+                      <span className="font-black text-white text-lg">Manage Your Vault</span>
                     </div>
-                    <span className="text-gray-400 group-hover:translate-x-1 group-hover:scale-110 transition-all duration-300">→</span>
+                    <span className="text-white/60 group-hover:translate-x-2 group-hover:scale-125 transition-all duration-300 text-2xl">?</span>
                   </div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </button>
               </div>
             </div>
@@ -329,7 +381,7 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
         @keyframes slideUp {
           from {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
@@ -358,6 +410,35 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
           }
         }
         
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translateY(-20px);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes glow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+          }
+          50% {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+          }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% {
+            opacity: 0.1;
+          }
+          50% {
+            opacity: 0.3;
+          }
+        }
+        
         .animate-gradient {
           background-size: 200% auto;
           animation: gradient 3s ease infinite;
@@ -368,8 +449,20 @@ export function Dashboard({ setCurrentPage }: DashboardProps) {
           animation: shimmer 2s linear infinite;
         }
         
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
+        }
+        
         .delay-1000 {
           animation-delay: 1000ms;
+        }
+        
+        .particles-container {
+          animation: pulse-slow 8s ease-in-out infinite;
         }
       `}</style>
     </div>
