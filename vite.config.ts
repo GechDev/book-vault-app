@@ -13,4 +13,11 @@ export default defineConfig({
       '@': '/src',
     },
   },
+  server: {
+    host: true,
+    allowedHosts: [
+      't8z467-5173.csb.app',
+      '*.csb.app'
+    ]
+  },
 })
